@@ -120,7 +120,7 @@ plt.show()
 
 
 '''
-Možemo primetiti da je nemoguće rešiti ovakav data set sa stepenom 1 ili 2. 
+Možemo primetiti da je nemoguće rešiti ovakav dataset sa stepenom 1 ili 2. 
 Polinomi stepena 3 ili više rešavaju problem ali izgleda da je sve preko 3 nepotrebno.
 Na grafiku možemo videti da se regresione krive za stepene 3, 4, 5, 6 skoro u potpunosti
 poklapaju, a i prosečni loss je sličan. 
