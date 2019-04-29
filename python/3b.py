@@ -23,17 +23,17 @@ class KNN:
     self.data = data
     self.k = k
     
-    # Gradimo model, X je matrica podataka a Q je vektor koji predstavlja upit.
+    # X je feature matrica, Q je upit
     self.X = tf.placeholder(shape=(None, nb_features), dtype=tf.float32)
     self.Y = tf.placeholder(shape=(None), dtype=tf.int32)
     self.Q = tf.placeholder(shape=(nb_features), dtype=tf.float32)
     
-    # Racunamo kvadriranu euklidsku udaljenost i uzimamo minimalnih k.
     dists = tf.sqrt(tf.reduce_sum(tf.square(tf.subtract(self.X, self.Q)), axis=1))
     _, idxs = tf.nn.top_k(-dists, self.k)  
     
     self.classes = tf.gather(self.Y, idxs)
     self.dists = tf.gather(dists, idxs)
+    
     
     self.w = tf.fill([k], 1/k)
     
@@ -45,32 +45,6 @@ class KNN:
     # Klasa sa najvise glasova je hipoteza.
     self.hyp = tf.argmax(self.scores)
     
-    # Crtamo podatke.
-    idxs0 = data['y'] == '0'
-    idxs1 = data['y'] == '1'
-    idxs2 = data['y'] == '2'
-
-    plt.scatter(data['x'][idxs0, 0], data['x'][idxs0, 1], c='b', 
-              edgecolors='k', label='Iris-setosa')
-    plt.scatter(data['x'][idxs1, 0], data['x'][idxs1, 1], c='g', 
-              edgecolors='k', label='Iris-versicolor')
-    plt.scatter(data['x'][idxs2, 0], data['x'][idxs2, 1], c='r', 
-              edgecolors='k', label='Iris-virginica')
-    '''
-    step_size = 0.01
-    x1, x2 = np.meshgrid(np.arange(min(data['x'][:, 0]), max(data['x'][:, 0]), 
-                               step_size),
-                     np.arange(min(data['x'][:, 1]), max(data['x'][:, 1]), 
-                               step_size))
-    x_feed = np.vstack((x1.flatten(), x2.flatten())).T
-
-    pred_plot = pred_list.reshape([x1.shape[0], x1.shape[1]])
-    classes_cmap = LinearSegmentedColormap.from_list('classes_cmap', 
-                                                 ['lightblue', 
-                                                  'lightgreen', 
-                                                  'lightyellow'])
-    plt.contourf(x1, x2, pred_plot, cmap=classes_cmap, alpha=0.7)
-    '''
   # Ako imamo odgovore za upit racunamo i accuracy.
   def predict(self, query_data):
     
@@ -89,13 +63,8 @@ class KNN:
           match = (int(hyp_val) == int(actual))
           if match:
             matches += 1
-          '''
-          if i % 10 == 0:
-            print('Test example: {}/{}| Predicted: {}| Actual: {}| Match: {}'
-                 .format(i, nb_queries, hyp_val, actual, match))
-          '''
+            
       accuracy = matches / nb_queries
-      #print('{} matches out of {} examples'.format(matches, nb_queries))
       
       return accuracy
     
@@ -151,11 +120,16 @@ for k in range (1, 16):
   # Pokrecemo kNN na test skupu
   accuracy = knn.predict({'x': test_x, 'y': test_y})
   accuracy_list.append(accuracy)
-  print('Test set accuracy: ', accuracy)
+  print('Test set accuracy:{:.2f}%'.format(accuracy*100))
   print('----------------------------')
-plt.show()
 
-plt.title('Accyracy & K value', fontsize=19)
+plt.title('Accuracy & K value', fontsize=19)
 plt.xlabel('K value')
 plt.ylabel('Accuracy')
 plt.plot(accuracy_list)
+plt.show()
+
+'''
+Najbolji izbor za k je u intervalu 5-8
+Tada je accuracy 80-90%
+'''
