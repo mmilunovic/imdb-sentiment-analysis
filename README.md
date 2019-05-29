@@ -1,6 +1,6 @@
 # Sentiment analysis with Multinomial Naive Bayes Classifier
 
-This was the first project in Machine Learning course on Faculty of Computing.
+This was the first project in Machine Learning course on [Faculty Of Computer Science](https://raf.edu.rs/).
 
 ## Problem description
 
