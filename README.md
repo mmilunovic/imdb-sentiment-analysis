@@ -6,11 +6,11 @@ This was the first project in Machine Learning course on [Faculty Of Computer Sc
 
 The project included several parts. This repository contains solutions for each assignment. 
 
-- Linear regression - **2a.py and 2b.py**
-- Instance-based models (KNN on Iris dataset) - **3a.py, 3b.py and 3c.py**
+- Linear regression - **2a.py** and **2b.py**
+- Instance-based models (KNN on Iris dataset) - **3a.py, 3b.py** and **3c.py**
 - Multinomial Naive Bayes Classifier (Sentiment analysis of IMDB movie reviews) - **4.py**
 
-Detailed explanation in [statement.pdf](https://github.com/mmilunovic/ml-homework/blob/master/statement.pdf)
+A detailed explanation is in [statement.pdf](https://github.com/mmilunovic/ml-homework/blob/master/statement.pdf)
 
 ## Dataset
 
